@@ -1,12 +1,7 @@
-require 'omniauth/strategies/oauth2'
-
 module OmniAuth
   module Strategies
-
-    # Authenticate to Mail.ru utilizing OAuth 2.0
     #   http://api.mail.ru/docs/guides/oauth/sites/
-
-    class Mailru < OmniAuth::Strategies::OAuth2
+    class Mailru < OAuth2
       option :name, "mailru"
 
       option :client_options, {

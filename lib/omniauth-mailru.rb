@@ -1,8 +1,5 @@
-require "omniauth"
-require "omniauth-mailru/version"
+require "omniauth-oauth2"
+require_relative "omniauth/strategies/mailru"
+require_relative "omniauth-mailru/version"
 
-module OmniAuth
-  module Strategies
-    autoload :Mailru, "omniauth/strategies/mailru"
-  end
-end
+OmniAuth.config.add_camelization("mailru", "Mailru")
