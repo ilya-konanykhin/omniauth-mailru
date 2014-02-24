@@ -2,6 +2,8 @@ module OmniAuth
   module Strategies
     #   http://api.mail.ru/docs/guides/oauth/sites/
     class Mailru < OAuth2
+      DEFAULT_SCOPE = ''
+
       option :name, "mailru"
 
       option :client_options, {
@@ -40,6 +42,27 @@ module OmniAuth
 
       def callback_url
         options.callback_url || super
+      end
+
+      # You can pass +display+ or +scope+ params to the auth request, if
+      # you need to set them dynamically.
+      #
+      # http://vk.com/dev/oauth_dialog
+      #
+      def authorize_params
+        super.tap do |params|
+          # just a copypaste from ominauth-facebook
+          %w[code state].each do |v|
+            if request.params[v]
+              params[v.to_sym] = request.params[v]
+
+              # to support omniauth-oauth2's auto csrf protection
+              session['omniauth.state'] = params[:state] if v == 'state'
+            end
+          end
+
+          params[:scope] ||= DEFAULT_SCOPE
+        end
       end
 
       private
