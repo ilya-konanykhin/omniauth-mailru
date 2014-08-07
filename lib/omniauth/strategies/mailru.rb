@@ -72,7 +72,7 @@ module OmniAuth
           params = {
             :method => 'users.getInfo',
             :app_id => options.client_id,
-            :session_id => access_token.token,
+            :session_key => access_token.token,
             :format => "json"
           }
           params[:sig] = calc_signature(params)
