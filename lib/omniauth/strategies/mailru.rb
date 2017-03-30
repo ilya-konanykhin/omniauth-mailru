@@ -25,7 +25,7 @@ module OmniAuth
           :name => [raw_info['first_name'], raw_info['last_name']].join(' '),
           :first_name => raw_info['first_name'],
           :last_name => raw_info['last_name'],
-          :image => (raw_info['has_pic'].to_s != "0") && raw_info['pic_big'] || nil,
+          :image => (raw_info['has_pic'].to_s != "0") && raw_info['pic_50'] || nil,
           :location => ((raw_info['location'] || {})['city'] || {})['name'],
           # gender is binary :)
           :gender => raw_info['sex'] == 0 ? 'male' : 'female',
